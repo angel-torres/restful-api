@@ -15,14 +15,20 @@ var server = http.createServer(function(req, res) {
     const parsedUrl = url.parse(req.url, true);
 
     // Get the path
-    var path = parsedUrl.pathname;
-    var trimmedPath = path.replace(/^\/+|\/+$/g,'') 
+    const path = parsedUrl.pathname;
+    const trimmedPath = path.replace(/^\/+|\/+$/g,'') 
+
+    // Get the query string ad an object
+    const queryStringObject = parsedUrl.query;
+
+    // Get the HTTO Method
+    const method = req.method.toLowerCase();
 
     // Send response
     res.end('Hello World\n');
 
     // Log the request path
-    console.log('Request received on path: '+ trimmedPath);
+    console.log('Request received on path: '+ trimmedPath + 'with method: '+ method +'Query string: ', queryStringObject);
 
 });
 
