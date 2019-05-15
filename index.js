@@ -24,11 +24,14 @@ var server = http.createServer(function(req, res) {
     // Get the HTTO Method
     const method = req.method.toLowerCase();
 
+    // Get the headers as an object
+    const headers = req.headers;
+
     // Send response
     res.end('Hello World\n');
 
     // Log the request path
-    console.log('Request received on path: '+ trimmedPath + 'with method: '+ method +'Query string: ', queryStringObject);
+    console.log('Request received on path: '+ trimmedPath + 'with method: '+ method +'Query string: ', queryStringObject, headers);
 
 });
 
