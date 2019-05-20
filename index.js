@@ -31,12 +31,15 @@ var server = http.createServer(function(req, res) {
     // Get the payload, if any
 
     const decoder = new StringDecoder('utf-8');
+
     var buffer = '';
+
     req.on('data', function(data) {
-        buffer + decoder.write(data);
+        buffer += decoder.write(data);
     });
+
     req.on('end', function() {
-        buffer+= decoder.end();
+        buffer += decoder.end();
 
         res.end('Hello World\n');
     
