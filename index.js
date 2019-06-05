@@ -5,7 +5,7 @@
 */
 
 // Dependencies
-const http = require('http');
+const http = require('http'); // 
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 
@@ -29,26 +29,27 @@ var server = http.createServer(function(req, res) {
     const headers = req.headers;
 
     // Get the payload, if any
-
+    
     const decoder = new StringDecoder('utf-8');
-
+    
     var buffer = '';
 
-    req.on('data', function(data) {
-        buffer += decoder.write(data);
-    });
-
-    req.on('end', function() {
-        buffer += decoder.end();
-
-        res.end('Hello World\n');
+    res.statusMessage = 'hello';
+    res.sendDate = false;
+    res.end();
+    // req.on('data', function(data) {
+    //     buffer += decoder.write(data);
+    // });
     
-        // Log the request path
-        console.log('Request received with this payload: ', buffer);
-    });
-
-
+    // req.on('end', function() {
+    //     buffer += decoder.end();
+    
+    //     res.end('Hello World\n');
+    
+    //     // Log the request path
+    // });
     // Send response
+    console.log('Request received with this headers: ', method);
 
 });
 
@@ -56,3 +57,7 @@ var server = http.createServer(function(req, res) {
 server.listen(3000, function() {
     console.log('*** The server is listening on port 3000 ***')
 })
+
+
+// Define a request router
+var router 
