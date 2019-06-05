@@ -34,22 +34,20 @@ var server = http.createServer(function(req, res) {
     
     var buffer = '';
 
-    res.statusMessage = 'hello';
-    res.sendDate = false;
-    res.end();
-    // req.on('data', function(data) {
-    //     buffer += decoder.write(data);
-    // });
+    req.on('data', function(data) {
+        buffer += decoder.write(data);
+    });
     
-    // req.on('end', function() {
-    //     buffer += decoder.end();
-    
-    //     res.end('Hello World\n');
-    
-    //     // Log the request path
-    // });
+   req.on('end', function() {
+    buffer += decoder.end();
+   
     // Send response
-    console.log('Request received with this headers: ', method);
+    res.end('Hello world!!!!!!! \n')
+ 
+    // Log the request path
+    console.log('Request received with this buffer: ', buffer);
+   });
+    
 
 });
 
