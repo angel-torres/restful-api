@@ -40,12 +40,39 @@ var server = http.createServer(function(req, res) {
     
    req.on('end', function() {
     buffer += decoder.end();
-   
+    
+    // Choose the handler this request should go to. If one is not found use the default handler/notFound
+    var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+    
+    // Construct the dta object to send to the handler
+    var data = {
+        'trimmedPath': trimmedPath,
+        'queryStringObject': queryStringObject,
+        'method': method,
+        'headers': headers,
+        'payload': buffer
+    }
+
+    // Route the request to the handlers specified in the router
+    chosenHandler(data, function(statusCode, payload) {
+        // Use the status code called back by the handler or default to 200
+        statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
+
+        // Use the payload called back by the handler or default to an empty object
+        payload = typeof(payload) == 'object' ? payload : {};
+
+        // Convert the payload to a string
+        var payloadString = JSON.stringify(payload)
+
+        res.writeHead(statusCode)
+
+        res.end(payloadString)
+        console.log('Returing this response: ', statusCode, payloadString);
+    })
+
     // Send response
-    res.end('Hello world!!!!!!! \n')
  
     // Log the request path
-    console.log('Request received with this buffer: ', buffer);
    });
     
 
@@ -56,6 +83,20 @@ server.listen(3000, function() {
     console.log('*** The server is listening on port 3000 ***')
 })
 
+var handlers = {
+
+}
+
+handlers.sample = function(data, callback) {
+    callback(406, {'name': 'sample handler'})
+}
+
+handlers.notFound = function(data, callback) {
+    // Callback a http status code, and a payload object
+    callback(404)
+}
 
 // Define a request router
-var router 
+var router = {
+    'sample': handlers.sample
+}
