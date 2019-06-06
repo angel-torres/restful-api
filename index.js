@@ -64,9 +64,11 @@ var server = http.createServer(function (req, res) {
             // Convert the payload to a string
             var payloadString = JSON.stringify(payload)
 
-            res.writeHead(statusCode)
+            res.setHeader('Content-Type', 'application/json');
 
-            res.end(payloadString)
+            res.writeHead(statusCode);
+
+            res.end(payloadString);
             console.log('Returing this response: ', statusCode, payloadString);
         })
 
@@ -79,7 +81,7 @@ var server = http.createServer(function (req, res) {
 });
 
 // Start the server, and have it listen on port 3000
-server.listen(3000, function () {
+server.listen(5000, function () {
     console.log('*** The server is listening on port 3000 ***')
 })
 
