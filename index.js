@@ -97,31 +97,30 @@ var unifiedServer = function (req, res) {
 
             res.writeHead(statusCode);
 
+            // Send response
             res.end(payloadString);
             console.log('Returing this response: ', statusCode, payloadString);
-        })
-
-        // Send response
-
-        // Log the request path
+        });
     });
 
-}
+};
 
 var handlers = {
 
-}
+};
 
-handlers.sample = function (data, callback) {
-    callback(406, { 'name': 'sample handler' })
-}
+handlers.ping = function (data, callback) {
+    callback(200);
+};
 
 handlers.notFound = function (data, callback) {
     // Callback a http status code, and a payload object
-    callback(404)
-}
+    callback(404);
+};
 
 // Define a request router
 var router = {
-    'sample': handlers.sample
-}
+    'ping': handlers.ping
+};
+
+// to Generate https support key and cer type `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem` inside terminal. This generates .pem files. 
