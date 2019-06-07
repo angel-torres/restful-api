@@ -15,7 +15,7 @@ var _data = require('./lib/data');
 
 // TESTING
 // @TODO delete this
-_data.update('test', 'newFile',{'fizzo':'buzzo'}, function(err){
+_data.delete('test', 'newFile', function(err){
     console.log('This was the error', err);
 });
 
