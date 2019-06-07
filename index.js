@@ -11,6 +11,13 @@ const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
+var _data = require('./lib/data');
+
+// TESTING
+// @TODO delete this
+_data.create('test', 'newFile', {'foo':'bar'}, function(err){
+    console.log('This was the error', err);
+});
 
 // Instantiating http server
 const httpServer = http.createServer(function (req, res) {
