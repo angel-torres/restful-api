@@ -110,7 +110,8 @@ var unifiedServer = function (req, res) {
 
 // Define a request router
 var router = {
-    'ping': handlers.ping
+    'ping': handlers.ping,
+    'users': handlers.users
 };
 
 // to Generate https support key and cer type `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem` inside terminal. This generates .pem files. 
