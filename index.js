@@ -11,13 +11,7 @@ const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
-var _data = require('./lib/data');
-
-// TESTING
-// @TODO delete this
-_data.delete('test', 'newFile', function(err){
-    console.log('This was the error', err);
-});
+const handlers = require('./lib/handlers');
 
 // Instantiating http server
 const httpServer = http.createServer(function (req, res) {
@@ -112,18 +106,7 @@ var unifiedServer = function (req, res) {
 
 };
 
-var handlers = {
 
-};
-
-handlers.ping = function (data, callback) {
-    callback(200);
-};
-
-handlers.notFound = function (data, callback) {
-    // Callback a http status code, and a payload object
-    callback(404);
-};
 
 // Define a request router
 var router = {
