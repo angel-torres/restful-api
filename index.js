@@ -93,7 +93,7 @@ var unifiedServer = function (req, res) {
             payload = typeof (payload) == 'object' ? payload : {};
 
             // Convert the payload to a string
-            var payloadString = JSON.stringify(payload)
+            var payloadString = JSON.stringify(payload);
 
             res.setHeader('Content-Type', 'application/json');
 
@@ -112,7 +112,8 @@ var unifiedServer = function (req, res) {
 // Define a request router
 var router = {
     'ping': handlers.ping,
-    'users': handlers.users
+    'users': handlers.users,
+    'tokens': handlers.tokens
 };
 
 // to Generate https support key and cer type `openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem` inside terminal. This generates .pem files. 
