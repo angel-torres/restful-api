@@ -75,7 +75,7 @@ var unifiedServer = function (req, res) {
         // Choose the handler this request should go to. If one is not found use the default handler/notFound
         var chosenHandler = typeof (router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
-        // Construct the dta object to send to the handler
+        // Construct the data object to send to the handler
         var data = {
             'trimmedPath': trimmedPath,
             'queryStringObject': queryStringObject,
